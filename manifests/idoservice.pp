@@ -1,4 +1,11 @@
+<<<<<<< HEAD
 #
+=======
+# Class icinga::idoservice
+#
+# manages the the ido service for icinga
+
+>>>>>>> upstream/production
 class icinga::idoservice {
 
   case $::lsbdistdescription {

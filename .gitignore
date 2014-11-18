@@ -1,5 +1,5 @@
+pkg/
 .bundle/
 *.sw?
-pkg
 spec/fixtures
 *.lock

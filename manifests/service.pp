@@ -1,4 +1,7 @@
+# Class icinga::service
 #
+# manages the the icinga service
+
 class icinga::service {
 
   case $::lsbdistdescription {
@@ -27,7 +30,10 @@ class icinga::service {
     enable     => true,
     hasstatus  => true,
     hasrestart => true,
-    restart    => $restart_provider,
+    restart    => $provider ? {
+      default   => '/etc/init.d/icinga reload',
+      'systemd' => "systemctl reload ${servicename}"
+    },
     require    => Class[icinga::idoservice],
   }
 

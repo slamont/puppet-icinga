@@ -1,6 +1,9 @@
+# Class icinga::params
 #
+# base params for icinga
+
 class icinga::params (
-  $web_ip = $ipaddress,
+  $web_ip = $::ipaddress,
   $web_port = 443,
   $icinga_user = 'icinga',
   $icinga_group = 'icinga',
@@ -10,14 +13,14 @@ class icinga::params (
   $ssl = true,
   $ssl_cacrt = undef,
   $ssl_cypher_list = 'ALL:!ADH:RC4+RSA:+HIGH:!MEDIUM:!LOW:!SSLv2:+SSLv3:+TLSv1:!EXP:!eNULL',
-  $manage_ssl = true,
-  $webhostname = $fqdn,
+  $manage_ssl = false,
+  $webhostname = $::fqdn,
   $configure_firewall = true,
   $gui_type = 'classic',
   $auth_template = 'icinga/icinga_auth_conf.erb',
   $notifications = 1,
   $embedded_perl = 0,
-  $perfdata = true,
+  $perfdata = false,
   $perfdatatype = 'pnp4nagios',
   $pnp4nagios_html_path = '',
   $admin_group = undef,
@@ -53,8 +56,8 @@ class icinga::params (
   $ldap_groupdn = undef,
   $ldap_binddn = undef,
   $ldap_bindpw = undef,
-  $ldap_userattr = uid,
-  $ldap_groupattr = memberOf,
+  $ldap_userattr = 'uid',
+  $ldap_groupattr = 'memberOf',
   $ldap_filter_extra = undef,
   $ldap_auth_group = undef,
 ) {
@@ -63,12 +66,12 @@ class icinga::params (
   } else {
     $nagios_plugins = '/usr/lib/nagios/plugins'
   }
-  $nagios_extra_plugins = hiera('monitoring::params::nagios_extra_plugins', undef)
+  $nagios_extra_plugins = hiera('monitoring::params::nagios_extra_plugins', $nagios_plugins)
   $icinga_cmd_grp = 'icingacmd'
-  $db_password = hiera('monitoring::db_password')
-  $email_user = hiera('monitoring::email_user')
-  $email_password = hiera('monitoring::email_password')
-  $ssl_cert_source = hiera('ssl_cert_source')
+  $db_password = hiera('monitoring::db_password', '')
+  $email_user = hiera('monitoring::email_user', '')
+  $email_password = hiera('monitoring::email_password', '')
+  $ssl_cert_source = hiera('ssl_cert_source', '')
   case $::osfamily {
     'RedHat': {
       if $icinga_cgi_path == '' {
@@ -114,11 +117,11 @@ class icinga::params (
         $icinga_html_path_real = $icinga_html_path
       }
 
-      if $icingacss == '' {
+      if $icinga_css_path == '' {
         $icinga_css_path_real = '/etc/icinga/stylesheets'
       }
       else {
-        $icinga_css_path_real = $icinga_css_path_real
+        $icinga_css_path_real = $icinga_css_path
       }
 
       if $pnp4nagios_html_path == '' {

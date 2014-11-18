@@ -1,5 +1,7 @@
-icinga
+abstractit-icinga
 ====
+
+[![Build Status](https://travis-ci.org/abstractitptyltd/abstractit-icinga.svg?branch=production)](https://travis-ci.org/abstractitptyltd/abstractit-icinga)
 
 ####Table of Contents
 
@@ -14,23 +16,20 @@ icinga
 8. [Development - Guide for contributing to the module](#development)
 9. [Release Notes - Notes on the most recent updates to the module](#release-notes)
 
-Breaking Changes
-----------------
+New stuff and bug fixes
+-----------------------
+
+I recently started a consulting company called Abstract IT Pty Ltd. I have transfered ownership of all my puppet modules to a new organisation on Puppet Forge called abstractit.
+I am making one final release of my modules under rendhalver and abstractit to give you a chance to switch over to the new organisation.
+I have also added a licence. All my modules will be licenced under Apache v2.
 
 More fixing changes. We now have officially tested support for Debian and Ubuntu thanks to Josh Holland (@jshholland)
-
-
-Old News
---------
 
 I added support for using ldap auth for the classic web gui and needed to make some changes to the ldap variables.
 I have added a new var `$ldap_security` to the params class. This is used to set which security method to use when talking to ldap. Accepted values are tls ssl or none
 I have also added vars for setting the base group dn for authentication `$ldap_groupdn`.
 The `$ldap_auth_group` is used to tell ldap which group to restrict access to.
 You can still use the `$ldap_filter` variable but apache auth may not work and it will be an extra filter to add to auth checking.
-
-New stuff and bug fixes
------------------------
 
 I have added support for graphing performance data with pnp4nagios (also published as a module for that as well)
 If you don't want this cool feature set `$icinga::params::perfdata` to false and it won't get setup for you.
@@ -109,7 +108,7 @@ extra settings
     $email_password = hiera('monitoring::email_password')
     $ssl_cert_source = hiera('ssl_cert_source')
 
-Using the new weg interface
+Using the new web interface
 
 set these options for the database the web interface will use
     $web_db_server = 'mysql',
@@ -161,55 +160,6 @@ OS support has only been tested where $osfamily == /(RedHat|Debian)/
 Development
 -----------
 
-Development team consists of Pete Brown (@rendhalver) and Josh Holland (@jshholland)
+Development team consists of Pete Brown (Abstract IT) (@rendhalver), Josh Holland (@jshholland) and Jason Antman (@jantman).
+Additional fixes and help provided by Randy Fay (@rfay) and @slamont.
 The module was started by Pete on a whim because I wanted to switch away from nagios.
-Josh is responsible for making sure the module supports Debian and Ubuntu.
-If you would like support for another OS and are willing to help test it let us know.
-
-
-Release Notes
--------------
-
-**1.1.0**
-
-Support for Debian/Ubuntu provided by  Josh Holland (@jshholland on Github)
-
-**1.1.0**
-
-Adding performance data processing with pnp4nagios.
-Added ldap auth for clasic gui.
-Fixed a bunch of bugs.
-
-**1.0.6**
-
-Adding the option of setting up the new web interface and or the classic one
-
-**1.0.5**
-
-Adding option to set which gui to use, "none" dosen't setup the gui
-Fixing name of service for apache
-
-**1.0.4**
-
-Adding option to turn off firewall management
-
-**1.0.3**
-
-Switching to puppetlabs/apache for managing the apache vhost
-Added Postgres setup.
-Automagically set the port for postgresql.
-Tricky logic ot make sure the services work as expected on Fedora using systemd.
-Install the appropriate database package if postgresql is needed
-Change the host file to grab the vars via lookupvar instead.
-
-**1.0.2**
-
-fixing some site specific setup options
-
-**1.0.1**
-
-fixing var name in config class
-
-**1.0.0**
-
-Initial release

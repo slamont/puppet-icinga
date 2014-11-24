@@ -1,5 +1,7 @@
-pkg/
-.bundle/
-*.sw?
-spec/fixtures
-*.lock
+.*.sw?
+Gemfile.lock
+.bundle
+doc
+pkg
+vendor/
+spec/fixtures/

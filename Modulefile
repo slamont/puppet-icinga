@@ -1,8 +1,8 @@
 name 'abstractit-icinga'
 author 'Abstract IT'
-version '1.2.2-rc2'
-summary 'manage an icinga server'
-description "manage icinga server with puppet"
+version '1.3.0'
+summary 'Manage an icinga server'
+description "Manage icinga server with puppet"
 project_page 'https://github.com/abstractitptyltd/puppet-icinga'
 source 'https://github.com/abstractitptyltd/puppet-icinga'
 license 'Apache v2 Licence'

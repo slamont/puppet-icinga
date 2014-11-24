@@ -139,11 +139,14 @@ class icinga::params (
   }
   # validate some params
   validate_re($gui_type, '^(classic|web|both|none)$',
-    "${gui_type} is not supported for gui_type.\n  Allowed values are 'classic', 'web', 'both' and 'none'.")
+  "${gui_type} is not supported for gui_type.
+  Allowed values are 'classic', 'web', 'both' and 'none'.")
   # validate auth params
   validate_re($web_auth_type, '^(internal|httpbasic|ldap|none)$',
-    "${web_auth_type} is not supported for web_auth_type.\n  Allowed values are 'internal', 'httpbasic', 'ldap' and 'none'.")
+  "${web_auth_type} is not supported for web_auth_type.
+  Allowed values are 'internal', 'httpbasic', 'ldap' and 'none'.")
   validate_re($ldap_security, '^(tls|ssl|none)$',
-    "${ldap_security} is not supported for ldap_security.\n  Allowed values are 'tls', 'ssl' and 'none'.")
+  "${ldap_security} is not supported for ldap_security.
+  Allowed values are 'tls', 'ssl' and 'none'.")
 }
 

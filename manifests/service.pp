@@ -17,12 +17,6 @@ class icinga::service {
       $provider = undef
     }
   }
-
-  $restart_provider = $provider ? {
-    default   => '/etc/init.d/icinga reload',
-    'systemd' => "systemctl reload ${servicename}"
-  }
-
   service { 'icinga':
     ensure     => running,
     name       => $servicename,

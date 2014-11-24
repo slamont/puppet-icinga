@@ -13,6 +13,12 @@ class icinga::gui {
   $ro_group       = $icinga::params::ro_group
   $ssl            = $icinga::params::ssl
 
+  anchor{'icinga::gui::begin': } ->
+  Class['::apache'] ->
+  Class['::apache::mod::prefork'] ->
+  Class['::apache::mod::php']->
+  anchor{'icinga::gui::end': }
+
   class { '::apache':
     default_vhost => false,
     mpm_module    => false,
@@ -103,11 +109,6 @@ class icinga::gui {
       group  => $icinga_cmd_grp,
       mode   => '2775',
     }
-  }
-
-  $docroot_for_gui = $icinga::params::gui_type ? {
-    default => '/usr/share/icinga/',
-    'web' => '/usr/share/icinga-web/pub',
   }
 
   apache::vhost { $icinga::params::webhostname:
